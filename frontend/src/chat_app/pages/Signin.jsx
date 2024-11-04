@@ -5,7 +5,7 @@ import { useSignIn } from "../customHooks.js/useSignin";
 import { useAuthContext } from "../Context/authUser";
 
 
-function Signin() {
+function SignIn() {
   const navigate = useNavigate();
   const { setAuthUser } = useAuthContext();
 
@@ -99,4 +99,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SignIn;

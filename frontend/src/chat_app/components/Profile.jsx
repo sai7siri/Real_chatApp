@@ -30,7 +30,7 @@ function Profile({ search }) {
 
             <div onClick={() => handleSelectedUser(item)} key={idx}>
               <div
-                className={`flex items-center gap-3 p-2 text-white hover:bg-gray-800 hover:text-neutral-600 rounded-md ${selectedUser && selectedUser._id === item._id ? "bg-gray-800 rounded-md text-white" : ""}`}
+                className={`flex items-center gap-3 p-2 text-white hover:bg-gray-800 hover:text-white rounded-md ${selectedUser && selectedUser._id === item._id ? "bg-gray-800 rounded-md text-white" : ""}`}
               >
                 <div className={`${isOnline ? "online" : "offline"} w-12 avatar`}>
                   <img src={item?.profile} alt="" className="bg-cover w-full" />

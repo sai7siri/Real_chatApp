@@ -133,7 +133,7 @@ function Signup() {
             {loading ? (
               <span className="loading loading-spinner text-success"></span>
             ) : (
-              "Submit"
+              "Signup"
             )}
           </button>
         </form>
@@ -143,7 +143,7 @@ function Signup() {
           </span>
           <Link
             to="/signin"
-            className="hover:underline underline-offset-4 hover:text-white ml-1 font-serif"
+            className="hover:underline underline-offset-4 text-white ml-1 font-serif"
           >
             Signin
           </Link>

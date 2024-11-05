@@ -10,7 +10,6 @@ function UserPro() {
   const {onlineUser} = useSocketContext();
 
   const isOnline =selectedUser && onlineUser.includes(selectedUser?._id);
-  console.log(isOnline);
 
   return (
    <div className="flex items-center text-white gap-3 bg-gray-900 px-4 py-2">

@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const authenticated = async (req, res, next) => {
   try {
-    const token = req.cookies.access_token;
+    const token = req.headers.authorization
 
     if (!token) {
       return res.status(401).json({
@@ -12,6 +12,7 @@ const authenticated = async (req, res, next) => {
     }
 
     const decoded = await jwt.verify(token, process.env.JWT_KEY);
+
 
     if (!decoded) {
       return res.status(403).json({ message: "Unauthorized! Token invalid" });

@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const createUser = async (req, res) => {
   try {
-    const { fullName, userName, password, profile, gender } = req.body;
+    const { fullName, userName, password, gender } = req.body;
 
     const user = await authModel.findOne({ userName });
 
@@ -68,25 +68,19 @@ const loginUser = async (req, res) => {
     }
  
      const token = await jwt.sign({userId : user._id} , process.env.JWT_KEY , { expiresIn : '24h' });
-
-     res.cookie("access_token" , token , {
-         httpOnly: true,
-         secure: false ,  // if false for http and true for https
-         sameSite: 'Strict', 
-         maxAge: 24 * 60 * 60 * 1000 
-     });
-
      
      user.password = undefined; 
 
      res.status(200).json({
       success : true,
       message : "login success",
-      data : user
+      data : user,
+      token : token
      })
  
  
    } catch (err) {
+    console.log(err);
      res.status(500).json({
        success: false,
        message: "internal error",
@@ -97,8 +91,7 @@ const loginUser = async (req, res) => {
  const logout = async (req, res)=>{
   try{
 
-     res.cookie("access_token", "" , {maxAge : 0});
-     res.status(200).json({
+     res.json({
         success : true,
         message : "logout success"
      })
@@ -116,9 +109,8 @@ const loginUser = async (req, res) => {
  const getUsers = async (req, res) => {
    try {
 
-   const logged = req.user;  //payload userId
+   const logged = req.user;
 
-   // Find user by ID
    const users = await authModel.find( { _id : {$ne : logged } } ).select('-password');
 
      if(!users) {

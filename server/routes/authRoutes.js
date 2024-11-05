@@ -13,7 +13,7 @@ routes.post("/create" , createUser);
 
 routes.post("/login" , loginUser);
 
-routes.get("/users" ,authenticated , getUsers);
+routes.get("/users" , authenticated , getUsers);
 
 routes.get("/logout" ,authenticated , logout);
 

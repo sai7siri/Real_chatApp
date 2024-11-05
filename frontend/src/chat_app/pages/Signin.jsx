@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import { useSignIn } from "../customHooks.js/useSignin";
 import { useAuthContext } from "../Context/authUser";
-
+import { startpoint } from "../customHooks.js/apiStatrtPoint";
 
 function SignIn() {
   const navigate = useNavigate();
   const { setAuthUser } = useAuthContext();
 
-  const {loading , login}=useSignIn();
 
+  const [loading , setLoading] = useState(false);
   const [form, setForm] = useState({
     userName: "",
     password: "",
@@ -26,22 +25,34 @@ function SignIn() {
     if (!form.userName || !form.password) {
       return toast.error("plz fill fields");
     }
-      try{
 
-        const {success, message ,data} = await login(form);
+    const url = `${startpoint}/api/v1/auth/login`;
+    try {
+      setLoading(true);
+      const res = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-        if(success){
-          toast.success(message);
-          localStorage.setItem("authuser" , JSON.stringify(data));
-          setAuthUser(data);
-          navigate('/home');
-        }else{
-          toast.error(message);
-        }
-      }catch(err){
-        return toast.error("something happened");
-
+      const {success , message , data , token} = await res.json();
+      setLoading(false);
+      if(success){
+        toast.success(message);
+        localStorage.setItem("authuser" , JSON.stringify(data));
+        sessionStorage.setItem('token' , token);
+        setAuthUser(data);
+        navigate('/home');
+      }else{
+        toast.error(message);
       }
+    } catch (err) {
+      setLoading(false);
+      toast.error("something happened");
+    }
   };
 
   return (
@@ -80,7 +91,11 @@ function SignIn() {
           </div>
 
           <button type="submit" className="btn btn-accent w-full my-4">
-            {loading ? <span className="loading loading-spinner"></span> : "submit"}
+            {loading ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
         <div>
@@ -89,7 +104,7 @@ function SignIn() {
           </span>
           <Link
             to="/signup"
-            className="hover:underline underline-offset-4 hover:text-white ml-1 font-serif"
+            className="hover:underline underline-offset-4 text-white ml-1 font-serif"
           >
             Signup
           </Link>

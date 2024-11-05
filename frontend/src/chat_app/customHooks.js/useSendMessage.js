@@ -13,7 +13,8 @@ export const useSendMessage=()=>{
             method : "POST",
             credentials : "include",
             headers : {
-               "Content-Type" : "application/json"
+               "Content-Type" : "application/json",
+               "Authorization" : `${sessionStorage.getItem('token')}`
             },
             body : JSON.stringify( data ) 
          });

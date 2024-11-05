@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const cookieParser = require('cookie-parser');
 
 const authRouter = require("./routes/authRoutes");
 const chatRouter = require("./routes/chatRoutes");
@@ -13,7 +12,6 @@ const {app , server} = require('./scoketio/socket');
 
 // Middlewares
 app.use(express.json());
-app.use(cookieParser());
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -34,5 +32,5 @@ server.listen(port, () => {
 // Mongoose connection
 mongoose.connect(process.env.MONGO_URL).then(
   () => console.log("Mongoose connected"),
-  (error) => console.log("Connection failed or network error:", error)
+  () => console.log("Connection failed or network error:")
 );

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { startpoint } from "./apiStatrtPoint";
 
 
- export const useSignIn = ()=> {
+ export default function useSignIn(){
 
    const [loading , setLoading] = useState(false);
 
@@ -18,14 +18,14 @@ import { startpoint } from "./apiStatrtPoint";
             },
             body : JSON.stringify(data)
          });
-
+         setLoading(false);
          const response = await res.json();
          return response;
       }catch(err){
-         return err;
-      }finally{
          setLoading(false);
+         return err;
       }
+
    }
 
    return {loading , login}

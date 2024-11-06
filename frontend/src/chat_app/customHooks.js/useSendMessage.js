@@ -30,7 +30,6 @@ export const useSendMessage=()=>{
        setMessages(newMessages);
 
       }catch(err){
-         console.log(err);
          toast.error("something went wrong ")
       }
    }

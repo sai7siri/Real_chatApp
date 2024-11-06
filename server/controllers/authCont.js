@@ -17,8 +17,8 @@ const createUser = async (req, res) => {
 
     const hashed = bcrypt.hashSync(password , 10);
 
-    const maleProfile = `https://avatar.iran.liara.run/public/boy?userName=${userName}`;
-    const femaleProfile = `https://avatar.iran.liara.run/public/girl?userName=${userName}`;
+    const maleProfile = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk740kSKRQ6-Zqea74Ftb6XQyGHQLbTt0MNQ&s";
+    const femaleProfile = "https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/11_avatar-512.png";
 
     const newUser = await authModel({
          fullName,
@@ -80,7 +80,6 @@ const loginUser = async (req, res) => {
  
  
    } catch (err) {
-    console.log(err);
      res.status(500).json({
        success: false,
        message: "internal error",
@@ -114,7 +113,6 @@ const loginUser = async (req, res) => {
    const users = await authModel.find( { _id : {$ne : logged } } ).select('-password');
 
      if(!users) {
-      console.log(users)
        return res.status(403).json({
          success: false,
          message: "user not found",
@@ -128,7 +126,6 @@ const loginUser = async (req, res) => {
  
  
    } catch (err) {
-      console.log(err)
      res.status(500).json({
        success: false,
        message: "internal error",

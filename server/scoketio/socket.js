@@ -8,6 +8,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: "http://localhost:5173",
   method: ["GET", "POST"],
+  allowedHeaders : ['Content-Type', 'Authorization'],
   credentials: true,
 });
 

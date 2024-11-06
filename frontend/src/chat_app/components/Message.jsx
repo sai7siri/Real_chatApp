@@ -8,7 +8,6 @@ const Message = ({ data}) => {
   const {authUser} = useAuthContext();
   const {selectedUser , messages} = useConversation();
 
-    // console.log(data);
 
   const converted =(time)=>{
     const date = new Date(time);

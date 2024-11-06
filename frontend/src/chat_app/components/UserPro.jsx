@@ -15,7 +15,7 @@ function UserPro() {
    <div className="flex items-center text-white gap-3 bg-gray-900 px-4 py-2">
 
       <div className={`${isOnline ? "online" : "offline" } w-12 avatar `}>
-        <img src={selectedUser?.profile} alt="profilee" className="bg-cover w-full" />
+        <img src={selectedUser?.profile} alt="profilee" className="bg-cover w-full rounded-xl" />
       </div>
       <h1 className="capitalize ">{selectedUser?.fullName}</h1>
     </div>

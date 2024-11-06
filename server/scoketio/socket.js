@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: "http://localhost:5173",
+  cors: "https://real-chatapp-kkhn.onrender.com",
   method: ["GET", "POST"],
   allowedHeaders : ['Content-Type', 'Authorization'],
   credentials: true,

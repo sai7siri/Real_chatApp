@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuthContext } from "./authUser";
-import {io} from "socket.io-client"
+import {io} from "socket.io-client";
+import {startpoint} from "../customHooks.js/apiStatrtPoint"
 
 const SocketContext = createContext();
 
@@ -15,7 +16,7 @@ export const SocketContextProvider=({children})=>{
    
    useEffect(()=>{
          if(authUser){
-            const socket = io('http://localhost:3030' , {
+            const socket = io(`${startpoint}` , {
                credentials : true,
                query : {
                   userId : authUser?._id

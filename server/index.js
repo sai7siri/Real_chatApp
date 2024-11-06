@@ -23,7 +23,7 @@ const {app , server} = require('./scoketio/socket');
 app.use(express.json());
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://real-chatapp-kkhn.onrender.com",
   allowedHeaders : ['Content-Type', 'Authorization'],
   credentials: true
 }));

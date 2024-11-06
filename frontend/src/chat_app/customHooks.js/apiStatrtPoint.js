@@ -1,3 +1,3 @@
 
 
-export const startpoint = "http://localhost:3030";
+export const startpoint = "https://real-chatapp-kkhn.onrender.com";
